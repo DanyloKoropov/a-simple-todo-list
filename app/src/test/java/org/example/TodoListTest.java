@@ -99,4 +99,37 @@ class TodoListTest {
         assertEquals("Task3", list.getPendingTasks().get(2));
     }
 
+    @Test
+    void addEmpty() {
+
+        TodoList list = new TodoList();
+        list.add(null);
+        list.add("");
+        list.add(" ");
+        list.add("     \n");
+        assertEquals(0, list.getPendingTasks().size());
+    }
+
+    @Test
+    void rejectDuplicatePendingTask() {
+        TodoList list = new TodoList();
+
+        list.add("Task1");
+        list.add("Task1");
+
+        assertEquals(1, list.getPendingTasks().size());
+    }
+
+    @Test
+    void allowDuplicateCompletedTask() {
+        TodoList list = new TodoList();
+
+        list.add("Task1");
+        list.complete("Task1");
+        list.add("Task1");
+
+        assertEquals(1, list.getPendingTasks().size());
+        assertEquals(1, list.getCompletedTasks().size());
+    }
+
 }

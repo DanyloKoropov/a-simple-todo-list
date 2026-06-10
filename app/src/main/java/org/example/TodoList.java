@@ -18,7 +18,14 @@ public class TodoList {
     }
 
     public void add(String newTask) {
-        pendingTasks.add(newTask);
+        if (newTask == null || newTask.isBlank()) {
+            System.out.println("Task can`t be null or blank!");
+        } else if (pendingTasks.contains(newTask)) {
+            System.out.println("You already have this task!");
+        } else {
+            pendingTasks.add(newTask);
+        }
+
     }
 
     public String all() {
